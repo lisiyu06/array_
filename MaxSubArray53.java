@@ -7,22 +7,23 @@
     // 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 
 public class MaxSubArray53 {
+
     // 1. 直接遍历法
-//    public int maxSubArray1(int[] nums) {
-//        int start = 0;
-//        int end = 0;
-//        int max = Integer.MIN_VALUE;
-//        for (start = 0; start < nums.length; start++) {
-//            int t = 0;
-//            for (end = start; end < nums.length; end++) {
-//                t += nums[end];
-//                if (t > max) {
-//                    max = t;
-//                }
-//            }
-//        }
-//        return max;
-//    }
+    public int maxSubArray1(int[] nums) {
+        int start = 0;
+        int end = 0;
+        int max = Integer.MIN_VALUE;
+        for (start = 0; start < nums.length; start++) {
+            int t = 0;
+            for (end = start; end < nums.length; end++) {
+                t += nums[end];
+                if (t > max) {
+                    max = t;
+                }
+            }
+        }
+        return max;
+    }
 
     // 2. 分治法
 
@@ -67,10 +68,35 @@ public class MaxSubArray53 {
         return Math.max(Math.max(leftSum, rightSum), crossSum);
     }
 
-    public int maxSubArray(int[] nums) {
+    public int maxSubArray2(int[] nums) {
         if (nums.length == 0) {
             return 0;
         }
         return helper(nums, 0, nums.length - 1);
     }
+
+    // 3. 贪心算法
+    public int maxSubArray3(int[] nums) {
+        int curSum = nums[0];
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            curSum = Math.max(nums[i], curSum + nums[i]);
+            maxSum = Math.max(maxSum, curSum);
+        }
+        return maxSum;
+    }
+
+    // 4. 动态规划
+    public int maxSubArray4(int[] nums) {
+        int curSum = 0;
+        int maxSum = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] >= 0) {
+                curSum = Math.max(nums[i], curSum + nums[i]);
+            }
+            maxSum = Math.max(maxSum, curSum);
+        }
+        return maxSum;
+    }
+
 }
