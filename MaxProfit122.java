@@ -32,4 +32,18 @@ public class MaxProfit122 {
         }
         return max;
     }
+
+    // 法 2：贪心算法
+    public int maxProfit2(int[] prices) {
+        int max = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i]  < prices[i + 1]) {
+                max += (prices[i+1] - prices[i]);
+            }
+        }
+        return max;
+    }
+
+    // 法 3：动态规划
+
 }
