@@ -13,7 +13,7 @@ public class Rotate189 {
     // 法 1：直接遍历
     // 时间复杂度：O(n*k)
     // 空间复杂度：O(1)
-    public void rotate(int[] nums, int k) {
+    public void rotate1(int[] nums, int k) {
         for (int i = 0; i < k; i++) {
             int cur = nums[nums.length - 1];
             for (int j = 0; j < nums.length;j++) {
@@ -25,6 +25,27 @@ public class Rotate189 {
         }
     }
 
-    // 法 2：
+    // 法 2：反转数组
+    // k % n 个元素将会被移到数组头部，前面元素向后顺移
+    // 1) 将数组中所有元素反转
+    // 2) 将反转后的数组的前 K 个元素反转
+    // 3) 将反转后的数组的后 n-k 个元素反转
+    // 时间复杂度：O(n)
+    // 空间复杂度：O(1)
+    public void rotate2(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
 
 }
