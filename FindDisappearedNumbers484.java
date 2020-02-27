@@ -31,4 +31,6 @@ public class FindDisappearedNumbers484 {
         }
         return result;
     }
+
+    // 法 2：
 }
